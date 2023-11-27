@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920859968221",
+    "project_id": "expenssapp",
+    "storage_bucket": "expenssapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920859968221:android:75464bd6b728ab2cc5d134",
+        "android_client_info": {
+          "package_name": "com.example.expense_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVjeEskXOlrCw7W-0Nm0Mqps1ytzfpWpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
