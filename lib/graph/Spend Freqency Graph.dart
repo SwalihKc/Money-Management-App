@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:expense_app/Function.dart';
+import 'package:expense_app/functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class GraphPage extends StatelessWidget {
-  GraphPage({super.key});
+  const GraphPage({super.key});
 
   // @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class GraphPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, top: 15),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        (Text(
+        (const Text(
           'Spend Frequency',
           style: TextStyle(
               color: Color.fromRGBO(
@@ -55,7 +55,7 @@ class GraphPage extends StatelessWidget {
                       curveSmoothness: 0.4,
                       belowBarData: BarAreaData(
                           show: true,
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
@@ -72,8 +72,8 @@ class GraphPage extends StatelessWidget {
               labelColor: Colors.amber,
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Color.fromARGB(248, 241, 237, 205)),
-              tabs: [
+                  color: const Color.fromARGB(248, 241, 237, 205)),
+              tabs: const [
                 Tab(
                   text: 'Today',
                 ),
@@ -107,9 +107,9 @@ class GraphPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width / 4.3,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Color.fromARGB(255, 221, 234, 240),
+                    color: const Color.fromARGB(255, 221, 234, 240),
                   ),
-                  child: Center(
+                  child: const Center(
                       child: Text(
                     'See All',
                     style: TextStyle(color: Color.fromARGB(225, 127, 61, 255)),
@@ -121,7 +121,7 @@ class GraphPage extends StatelessWidget {
         ),
         ListView.builder(
           reverse: true,
-          physics: PageScrollPhysics(),
+          physics: const PageScrollPhysics(),
           shrinkWrap: true,
           itemCount: prov.transactions.length,
           itemBuilder: (context, index) {
@@ -131,7 +131,8 @@ class GraphPage extends StatelessWidget {
               leading: Image.asset('assets/${transactionData["category"]}.png'),
               title: Text(
                 transactionData["category"],
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -142,11 +143,11 @@ class GraphPage extends StatelessWidget {
                   transactionData["transactionType"] == "income"
                       ? Text(
                           '+\$${transactionData['amount']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w900, color: Colors.green),
                         )
                       : Text('-\$${transactionData['amount']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w900, color: Colors.red)),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),

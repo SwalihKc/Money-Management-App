@@ -1,4 +1,4 @@
-import 'package:expense_app/LoginPage.dart';
+import 'package:expense_app/screens/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -42,7 +42,7 @@ class forgotSent extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => loginPage(),
+                    builder: (context) => LoginPage(),
                   ));
             },
             child: Text(

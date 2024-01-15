@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:expense_app/Function.dart';
+import 'package:expense_app/functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -8,60 +8,58 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'homePage.dart';
 
-class IncomePage extends StatelessWidget {
-  IncomePage({super.key,});
+class ThirdPage extends StatelessWidget {
+  ThirdPage({
+    super.key,
+  });
 
-  String? dropdownValue1;
+  String? dropdownValue3;
 
-  String? dropdownValue2;
+  String? dropdownValue4;
 
-  bool isSwitch1 = false;
-
-  // function obj = function();
-  var incomeAmountController = TextEditingController();
-
-  var incomeDiscriptionController = TextEditingController();
+  bool isSwitch2 = false;
 
   var newTransactionData = {};
 
   DateTime now = DateTime.now();
 
+  var expensAmountController1 = TextEditingController();
+
+  var SubtitleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<function>(context);
-    void functionnn(BuildContext context) async {
-      String incomeAmount = incomeAmountController.text;
-      String incomediscription = incomeDiscriptionController.text;
-      int incomevalue = int.parse(incomeAmount);
-      newTransactionData['category'] = prov.dropdownValue1;
-      newTransactionData["subtitle"] = incomediscription;
-      newTransactionData["amount"] = incomevalue;
+    void functionExp(context) async {
+      String ExpAmount = expensAmountController1.text;
+      String Subtitle = SubtitleController.text;
+      int expensevalue = int.parse(ExpAmount);
+      newTransactionData["category"] = prov.dropdownValue3;
+      newTransactionData["amount"] = expensevalue;
+      newTransactionData["transactionType"] = "expense";
+      newTransactionData["subtitle"] = Subtitle;
       newTransactionData["datetime"] = DateFormat.jm().format(now);
-      newTransactionData["transactionType"] = "income";
-      var newList2 = jsonEncode(newTransactionData);
-      prov.transactions.add(newList2);
-      // print(widget.obj.transactions);
-      prov.incomeadd(incomevalue);
+      var newList = jsonEncode(newTransactionData);
+      prov.transactions.add(newList);
+      print(prov.transactions);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setStringList("ListSave", prov.transactions);
 
+      prov.expAdd(expensevalue);
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyHomePage(
-                 
-                
-                )),
+          builder: (context) => MyHomePage(),
+        ),
       );
     }
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(0, 168, 107, 1),
+      backgroundColor: Colors.red,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110),
         child: AppBar(
-          backgroundColor: Color.fromRGBO(0, 168, 107, 1),
+          backgroundColor: Colors.red,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -71,8 +69,8 @@ class IncomePage extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          title: Text(
-            'Income',
+          title: const Text(
+            'Expense',
             style: TextStyle(fontSize: 23),
           ),
           elevation: 0,
@@ -80,10 +78,10 @@ class IncomePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
+          const SizedBox(
             height: 35,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'How much?',
                 style: TextStyle(fontSize: 19, color: Colors.white),
@@ -112,13 +110,13 @@ class IncomePage extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   )),
               keyboardType: TextInputType.number,
-              controller: incomeAmountController,
+              controller: expensAmountController1,
             ),
           ),
           Container(
             height: 483,
             width: 490,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40), topRight: Radius.circular(35)),
               color: Colors.white,
@@ -137,12 +135,15 @@ class IncomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20)),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        hint: Text(
+                        hint: const Text(
                           'Catogary',
                           style: TextStyle(fontSize: 22),
                         ),
                         items: [
-                          'Salary',
+                          'Shopping',
+                          'Food',
+                          'Subscription',
+                          'Transpotation',
                         ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -154,9 +155,9 @@ class IncomePage extends StatelessWidget {
                         }).toList(),
                         onChanged: (value) {
                           // setState(() {
-                          //   dropdownValue1 = value;
+                          //   dropdownValue3 = value;
                           // });
-                          prov.oprator1(value);
+                          prov.operator3(value);
                         },
                       ),
                     ),
@@ -172,7 +173,7 @@ class IncomePage extends StatelessWidget {
                           ),
                           hintText: 'Description',
                         ),
-                        controller: incomeDiscriptionController,
+                        controller: SubtitleController,
                       ),
                     ),
                     Padding(
@@ -186,7 +187,7 @@ class IncomePage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             fillColor: Colors.amber),
-                        hint: Text(
+                        hint: const Text(
                           'Wallet',
                           style: TextStyle(fontSize: 21),
                         ),
@@ -196,35 +197,39 @@ class IncomePage extends StatelessWidget {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                           );
                         }).toList(),
                         onChanged: (value) {
                           // setState(() {
-                          //   dropdownValue2 = value;
+                          //   dropdownValue4 = value;
                           // });
-                          prov.oprator2(value);
+                          prov.operator4(value);
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     DottedBorder(
+                      dashPattern: [7, 9],
+                      strokeWidth: 0.6,
+                      borderType: BorderType.RRect,
+                      radius: Radius.circular(14),
                       child: Container(
                         height: 55,
                         width: 370,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ImageIcon(
+                            const ImageIcon(
                               AssetImage('assets/attachment.png'),
                               size: 45,
                             ),
                             TextButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Add attachment',
                                   style: TextStyle(
                                       fontSize: 20,
@@ -233,22 +238,18 @@ class IncomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      dashPattern: [7, 9],
-                      strokeWidth: 0.6,
-                      borderType: BorderType.RRect,
-                      radius: Radius.circular(14),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: ListTile(
-                        title: Text(
+                        title: const Text(
                           'Repeate',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
-                        subtitle: Text('Repeat Transaction'),
+                        subtitle: const Text('Repeat Transaction'),
                         trailing: Switch(
-                          value: isSwitch1,
+                          value: isSwitch2,
                           onChanged: (value) {
                             // setState(() {
                             //   isSwitch = value;
@@ -256,22 +257,22 @@ class IncomePage extends StatelessWidget {
                             prov.oprator1(value);
                           },
                           activeColor: Colors.white,
-                          activeTrackColor: Color.fromRGBO(117, 54, 241, 1),
+                          activeTrackColor: const Color.fromRGBO(117, 54, 241, 1),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Container(
                       height: 60,
                       width: 350,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromRGBO(117, 54, 241, 1)),
+                          color: const Color.fromRGBO(117, 54, 241, 1)),
                       child: TextButton(
                           onPressed: () {
-                            functionnn(context);
+                            functionExp(context);
                           },
-                          child: Text(
+                          child: const Text(
                             'Continue',
                             style: TextStyle(
                                 color: Colors.white,

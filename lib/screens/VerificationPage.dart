@@ -1,14 +1,14 @@
 import 'package:expense_app/auth/EmailOTPapi.dart';
-import 'package:expense_app/Function.dart';
 import 'package:expense_app/auth/firebaseAuth.dart';
-import 'package:expense_app/homePage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
-class verificationPage extends StatelessWidget {
-  verificationPage(
+class VerificationPage extends StatelessWidget {
+  VerificationPage(
       {super.key,
       required this.id,
       required this.name,
@@ -24,9 +24,9 @@ class verificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     apiCalling OtpVerfication = apiCalling();
-    final prov=Provider.of<function>(context);
+    final prov = Provider.of<function>(context);
 
-    FireBaseAuth PasswordAuthentication = FireBaseAuth();
+    FireBaseAuth passwordAuthentication = FireBaseAuth();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -96,7 +96,7 @@ class verificationPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
-                        color: Color.fromRGBO(127, 61, 255, 1),
+                        color: const Color.fromRGBO(127, 61, 255, 1),
                       ),
                     ),
                     TextSpan(
@@ -120,7 +120,7 @@ class verificationPage extends StatelessWidget {
                 height: 50,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 4,right: 12),
+                padding: const EdgeInsets.only(left: 4, right: 12),
                 child: ElevatedButton(
                   onPressed: () async {
                     // setState(() {
@@ -129,12 +129,12 @@ class verificationPage extends StatelessWidget {
                     prov.verifcationLoading(prov.isLoading4);
 
                     print(id);
-                    var status = await OtpVerfication.verifyOtp(
-                        id, otpController.text);
+                    var status =
+                        await OtpVerfication.verifyOtp(id, otpController.text);
                     if (status == 'success') {
-                      await PasswordAuthentication
-                          .createUserWithEmailAndPassword(name,
-                              password, email, context);
+                      await passwordAuthentication
+                          .createUserWithEmailAndPassword(
+                              name, password, email, context);
 
                       Navigator.pushAndRemoveUntil(
                           context,
@@ -144,7 +144,8 @@ class verificationPage extends StatelessWidget {
                           (route) => false);
                     } else {
                       prov.verifcationLoading(prov.isLoading4);
-                      var snackBar = const SnackBar(content: Text('Incorrect OTP'));
+                      var snackBar =
+                          const SnackBar(content: Text('Incorrect OTP'));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                     // setState(() {
@@ -160,7 +161,7 @@ class verificationPage extends StatelessWidget {
                     ),
                   ),
                   child: prov.isLoading4
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
                       : Text(
                           'Verify',
                           style: GoogleFonts.inter(

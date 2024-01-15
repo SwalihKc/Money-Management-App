@@ -1,21 +1,21 @@
-import 'package:expense_app/Function.dart';
 import 'package:expense_app/auth/firebaseAuth.dart';
-import 'package:expense_app/forgetPassword.dart';
-import 'package:expense_app/signUpPage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/screens/forgetPassword.dart';
+import 'package:expense_app/screens/signUpPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class loginPage extends StatelessWidget {
-  loginPage({super.key});
-  var EmailLoginController = TextEditingController();
-
-  var PasswordLoginController = TextEditingController();
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+  
+   var emailLoginController = TextEditingController();
+   var passwordLoginController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    FireBaseAuth PasswordAuthentication = FireBaseAuth();
-    final prov=Provider.of<function>(context);
+    FireBaseAuth passwordAuthentication = FireBaseAuth();
+    final prov = Provider.of<function>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,7 +44,7 @@ class loginPage extends StatelessWidget {
               height: 90,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10,right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -59,13 +59,14 @@ class loginPage extends StatelessWidget {
                         color: Color.fromARGB(255, 206, 201, 201),
                       )),
                   hintText: 'Email',
-                  hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  hintStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w400),
                 ),
-                controller: EmailLoginController,
+                controller: emailLoginController,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 25,right: 10,left: 10),
+              padding: const EdgeInsets.only(top: 25, right: 10, left: 10),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -80,15 +81,15 @@ class loginPage extends StatelessWidget {
                         color: Color.fromARGB(255, 206, 201, 201),
                       )),
                   hintText: 'Password',
-                  hintStyle:
-                      const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  hintStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w400),
                   suffixIcon: IconButton(
                     onPressed: () {
                       // setState(() {
                       //   eyeView = !eyeView;
                       // });
-                      
-                       prov.LoginisObscured(prov.eyeView);
+
+                      prov.LoginisObscured(prov.eyeView);
                     },
                     icon: Icon(prov.eyeView
                         ? Icons.visibility_outlined
@@ -97,32 +98,32 @@ class loginPage extends StatelessWidget {
                 ),
                 obscureText: prov.eyeView,
                 style: const TextStyle(fontSize: 16),
-                controller: PasswordLoginController,
+                controller: passwordLoginController,
               ),
             ),
             const SizedBox(
               height: 30,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10,right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: ElevatedButton(
                 onPressed: () async {
-                  await PasswordAuthentication.logInUser(
-                      email: EmailLoginController.text,
-                      password: PasswordLoginController.text,
+                  await passwordAuthentication.logInUser(
+                      email: emailLoginController.text,
+                      password: passwordLoginController.text,
                       context: context);
                 },
-                child: Text(
-                  'Login',
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w600),
-                ),
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(360, 50),
                   backgroundColor: const Color.fromRGBO(127, 61, 255, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
+                ),
+                child: Text(
+                  'Login',
+                  style: GoogleFonts.inter(
+                      fontSize: 18, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -131,7 +132,6 @@ class loginPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                
                 Navigator.push(
                     context,
                     MaterialPageRoute(

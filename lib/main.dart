@@ -1,8 +1,9 @@
 import 'package:easy_splash_screen/easy_splash_screen.dart';
-import 'package:expense_app/Function.dart';
-import 'package:expense_app/firebase_options.dart';
-import 'package:expense_app/homePage.dart';
-import 'package:expense_app/welcomePage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/functions/firebase_options.dart';
+import 'package:expense_app/screens/homePage.dart';
+import 'package:expense_app/screens/welcomePage.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             alignment: Alignment.center,
           ),
           logoWidth: 200,
-          backgroundColor: Color.fromRGBO(127, 61, 255, 1),
+          backgroundColor: const Color.fromRGBO(127, 61, 255, 1),
           showLoader: true,
           loaderColor: Colors.white,
           durationInSeconds: 4,
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.active) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               final user = snapshot.data;
               if (user != null &&
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                 return MyHomePage();
               } else {
                 print("user is not logged in");
-                return welcomePage();
+                return WelcomePage();
               }
             },
           ),

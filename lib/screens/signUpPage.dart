@@ -1,10 +1,10 @@
 import 'package:expense_app/auth/EmailOTPapi.dart';
-import 'package:expense_app/Function.dart';
 import 'package:expense_app/auth/GoogleSigning.dart';
-import 'package:expense_app/LoginPage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/screens/LoginPage.dart';
 import 'package:expense_app/auth/PhoneAuth.dart';
-import 'package:expense_app/VerificationPage.dart';
-import 'package:expense_app/homePage.dart';
+import 'package:expense_app/screens/VerificationPage.dart';
+import 'package:expense_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -119,7 +119,7 @@ class Signing extends StatelessWidget {
                 ),
               ),
               hintText: 'Password',
-              hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
               suffixIcon: IconButton(
                 onPressed: () {
                   // setState(() {
@@ -193,7 +193,7 @@ class Signing extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => verificationPage(
+                    builder: (context) => VerificationPage(
                       id: id,
                       name: NameController.text,
                       password: passwordSignUpController.text,
@@ -208,13 +208,6 @@ class Signing extends StatelessWidget {
                 
               }
             },
-            child: prov.isLoading
-                ? CircularProgressIndicator()
-                : Text(
-                    'Sign Up',
-                    style: GoogleFonts.inter(
-                        fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(360, 50),
               backgroundColor: Color.fromRGBO(127, 61, 255, 1),
@@ -222,6 +215,13 @@ class Signing extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
               ),
             ),
+            child: prov.isLoading
+                ? const CircularProgressIndicator()
+                : Text(
+                    'Sign Up',
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
           ),
         ),
         const Padding(
@@ -392,7 +392,7 @@ class Signing extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => loginPage(),
+                      builder: (context) => LoginPage(),
                     ));
               },
               child: Text('Login?',

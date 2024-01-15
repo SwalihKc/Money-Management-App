@@ -1,17 +1,17 @@
-import 'package:expense_app/Function.dart';
-import 'package:expense_app/LoginPage.dart';
-import 'package:expense_app/signUpPage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/screens/LoginPage.dart';
+import 'package:expense_app/screens/signUpPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class welcomePage extends StatelessWidget {
-  const welcomePage({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final prov=Provider.of<function>(context);
+    final prov = Provider.of<function>(context);
     List<Image> sliderImages = [
       Image.asset('assets/Illustration.png'),
       Image.asset("assets/Illustration2.png"),
@@ -28,7 +28,7 @@ class welcomePage extends StatelessWidget {
       "Setup your budget for each category\nso you in control"
     ];
     return Scaffold(
-       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
@@ -39,8 +39,8 @@ class welcomePage extends StatelessWidget {
               autoSliderDelay: Duration(seconds: 2),
               slideIndicator: CircularSlideIndicator(
                 alignment: AlignmentDirectional.bottomCenter,
-                padding: EdgeInsets.only(bottom: 20),
-                currentIndicatorColor: Color.fromRGBO(127, 61, 255, 1),
+                padding: const EdgeInsets.only(bottom: 20),
+                currentIndicatorColor: const Color.fromRGBO(127, 61, 255, 1),
               ),
               slideBuilder: (index) {
                 return Column(
@@ -71,9 +71,11 @@ class welcomePage extends StatelessWidget {
               itemCount: sliderImages.length,
             ),
           ),
-     const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: ElevatedButton(
               onPressed: () {
                 prov.welcomeSignUpLoading(prov.isLoading3);
@@ -82,29 +84,28 @@ class welcomePage extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => Signing(),
                     ));
-                     prov.welcomeSignUpLoading(prov.isLoading3);
+                prov.welcomeSignUpLoading(prov.isLoading3);
               },
-             
-              child:prov.isLoading3?
-              CircularProgressIndicator()
-               :Text(
-                'Sign Up',
-                style: TextStyle(fontSize: 17),
-              ),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(360, 50),
-                backgroundColor: Color.fromRGBO(127, 61, 255, 1),
+                backgroundColor: const Color.fromRGBO(127, 61, 255, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
               ),
+              child: prov.isLoading3
+                  ? const CircularProgressIndicator()
+                  : const Text(
+                      'Sign Up',
+                      style: TextStyle(fontSize: 17),
+                    ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -114,9 +115,6 @@ class welcomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Login',
-                    style: TextStyle(
-                        fontSize: 17, color: Color.fromRGBO(127, 61, 255, 1))),
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(360, 50),
                   backgroundColor: Color.fromARGB(147, 250, 252, 252),

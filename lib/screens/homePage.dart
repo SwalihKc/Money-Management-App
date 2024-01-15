@@ -1,14 +1,13 @@
-import 'package:expense_app/transferPage.dart';
-import 'package:expense_app/welcomePage.dart';
+import 'package:expense_app/functions/Function.dart';
+import 'package:expense_app/graph/Spend%20Freqency%20Graph.dart';
+import 'package:expense_app/screens/transferPage.dart';
+import 'package:expense_app/screens/welcomePage.dart';
 import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'ExpensPage.dart';
-import 'Function.dart';
-import 'Spend Freqency Graph.dart';
 import 'incomPage.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -24,7 +23,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final prov = Provider.of<function>(context);
     prov.operator7();
-    FirebaseAuth auth=FirebaseAuth.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
 
     return Visibility(
       visible: true,
@@ -34,6 +33,9 @@ class MyHomePage extends StatelessWidget {
           child: ListView(
             children: [
               const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(127, 61, 255, 1),
+                ),
                 child: Text(
                   'Account',
                   style: TextStyle(
@@ -41,27 +43,22 @@ class MyHomePage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(127, 61, 255, 1),
-                ),
               ),
               ListTile(
-                title: Text('Log Out'),
-               
-                trailing: InkWell(onTap: ()=> _signOut(context),
-                  
-                
-                  child: Icon(Icons.logout),),
-                
+                title: const Text('Log Out'),
+                trailing: InkWell(
+                  onTap: () => _signOut(context),
+                  child: const Icon(Icons.logout),
+                ),
               ),
             ],
           ),
         ),
         drawerEnableOpenDragGesture: false,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
+          preferredSize: const Size.fromHeight(70),
           child: AppBar(
-            backgroundColor: Color(0xfffff6e5),
+            backgroundColor: const Color(0xfffff6e5),
             elevation: 1,
             shadowColor: Colors.transparent,
             leading: ClipRRect(
@@ -79,7 +76,7 @@ class MyHomePage extends StatelessWidget {
               height: 85,
               child: Center(
                 child: DropdownButtonFormField<String>(
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: Colors.black),
@@ -89,8 +86,8 @@ class MyHomePage extends StatelessWidget {
                       'assets/arrow-down-2.png',
                       scale: 0.7,
                     ),
-                    contentPadding: EdgeInsets.all(13.5),
-                    fillColor: Color(0xfffff6e5),
+                    contentPadding: const EdgeInsets.all(13.5),
+                    fillColor: const Color(0xfffff6e5),
                     filled: true,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
@@ -158,7 +155,7 @@ class MyHomePage extends StatelessWidget {
               Container(
                 height: 205,
                 width: 393,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xfffff6e5),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(34),
@@ -167,7 +164,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Account Balance',
                       style: TextStyle(fontSize: 18),
                     ),
@@ -191,9 +188,8 @@ class MyHomePage extends StatelessWidget {
                               ),
                               child: Column(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 35),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 15, left: 35),
                                     child: Text(
                                       'Income',
                                       style: TextStyle(
@@ -205,7 +201,7 @@ class MyHomePage extends StatelessWidget {
                                         const EdgeInsets.only(top: 4, left: 45),
                                     child: Text(
                                       '\$${prov.incomeAmount}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
@@ -239,9 +235,8 @@ class MyHomePage extends StatelessWidget {
                               ),
                               child: Column(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 16, left: 45),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 16, left: 45),
                                     child: Text(
                                       'Expenses',
                                       style: TextStyle(color: Colors.white),
@@ -252,7 +247,7 @@ class MyHomePage extends StatelessWidget {
                                         const EdgeInsets.only(top: 4, left: 50),
                                     child: Text(
                                       '\$${prov.expensAmount}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
@@ -288,7 +283,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         floatingActionButton: FabCircularMenuPlus(
-          fabCloseIcon: Icon(
+          fabCloseIcon: const Icon(
             Icons.close,
             size: 30,
             color: Colors.white,
@@ -298,7 +293,7 @@ class MyHomePage extends StatelessWidget {
             size: 60,
             color: Colors.white,
           ),
-          fabColor: Color.fromRGBO(127, 61, 255, 1),
+          fabColor: const Color.fromRGBO(127, 61, 255, 1),
           alignment: Alignment.bottomCenter,
           ringColor: Colors.white.withAlpha(25),
           ringDiameter: 450.0,
@@ -306,14 +301,14 @@ class MyHomePage extends StatelessWidget {
           fabSize: 70.0,
           fabElevation: 8.0,
           fabIconBorder: const CircleBorder(),
-          animationDuration: Duration(milliseconds: 900),
+          animationDuration: const Duration(milliseconds: 900),
           children: [
             InkWell(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => incomePage(),
+                      builder: (context) => IncomePage(),
                     ));
               },
               child: Container(
@@ -325,7 +320,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                   color: Colors.green,
                 ),
-                child: ImageIcon(
+                child: const ImageIcon(
                   AssetImage("assets/income.png"),
                   color: Colors.white,
                 ),
@@ -336,7 +331,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => incomePage(),
+                      builder: (context) => IncomePage(),
                     ));
               },
               child: InkWell(
@@ -344,7 +339,7 @@ class MyHomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => fourthPaeg(),
+                        builder: (context) => const TransferPage(),
                       ));
                 },
                 child: Container(
@@ -356,7 +351,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     color: Colors.blue,
                   ),
-                  child: ImageIcon(
+                  child: const ImageIcon(
                     AssetImage("assets/currency-exchange.png"),
                     color: Colors.white,
                   ),
@@ -380,7 +375,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                   color: Colors.red,
                 ),
-                child: ImageIcon(
+                child: const ImageIcon(
                   AssetImage("assets/expense.png"),
                   color: Colors.white,
                 ),
@@ -444,10 +439,14 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _signOut(BuildContext context) async {
-  await FirebaseAuth.instance.signOut();
-   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => welcomePage(),));
-  print('logout');
-  
-}
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WelcomePage(),
+        ));
+    print('logout');
+  }
 }

@@ -1,5 +1,5 @@
-import 'package:expense_app/Function.dart';
 import 'package:expense_app/auth/PhoneAuth.dart';
+import 'package:expense_app/functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';

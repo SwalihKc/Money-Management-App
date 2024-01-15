@@ -1,66 +1,67 @@
 import 'dart:convert';
-import 'package:expense_app/Function.dart';
+import 'package:expense_app/functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-
 import 'homePage.dart';
 
-class ThirdPage extends StatelessWidget {
-  ThirdPage({
-    super.key,
-  });
+class IncomePage extends StatelessWidget {
+  IncomePage({super.key,});
 
-  String? dropdownValue3;
+  String? dropdownValue1;
 
-  String? dropdownValue4;
+  String? dropdownValue2;
 
-  bool isSwitch2 = false;
+  bool isSwitch1 = false;
+
+  // function obj = function();
+  var incomeAmountController = TextEditingController();
+
+  var incomeDiscriptionController = TextEditingController();
 
   var newTransactionData = {};
 
   DateTime now = DateTime.now();
 
-  var expensAmountController1 = TextEditingController();
-
-  var SubtitleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<function>(context);
-    void functionExp(context) async {
-      String ExpAmount = expensAmountController1.text;
-      String Subtitle = SubtitleController.text;
-      int expensevalue = int.parse(ExpAmount);
-      newTransactionData["category"] = prov.dropdownValue3;
-      newTransactionData["amount"] = expensevalue;
-      newTransactionData["transactionType"] = "expense";
-      newTransactionData["subtitle"] = Subtitle;
+    void functionnn(BuildContext context) async {
+      String incomeAmount = incomeAmountController.text;
+      String incomediscription = incomeDiscriptionController.text;
+      int incomevalue = int.parse(incomeAmount);
+      newTransactionData['category'] = prov.dropdownValue1;
+      newTransactionData["subtitle"] = incomediscription;
+      newTransactionData["amount"] = incomevalue;
       newTransactionData["datetime"] = DateFormat.jm().format(now);
-      var newList = jsonEncode(newTransactionData);
-      prov.transactions.add(newList);
-      print(prov.transactions);
+      newTransactionData["transactionType"] = "income";
+      var newList2 = jsonEncode(newTransactionData);
+      prov.transactions.add(newList2);
+      // print(widget.obj.transactions);
+      prov.incomeadd(incomevalue);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setStringList("ListSave", prov.transactions);
 
-      prov.expAdd(expensevalue);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MyHomePage(),
-        ),
+            builder: (context) => MyHomePage(
+                 
+                
+                )),
       );
     }
 
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromRGBO(0, 168, 107, 1),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110),
         child: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromRGBO(0, 168, 107, 1),
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -71,7 +72,7 @@ class ThirdPage extends StatelessWidget {
           ),
           centerTitle: true,
           title: Text(
-            'Expense',
+            'Income',
             style: TextStyle(fontSize: 23),
           ),
           elevation: 0,
@@ -111,7 +112,7 @@ class ThirdPage extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   )),
               keyboardType: TextInputType.number,
-              controller: expensAmountController1,
+              controller: incomeAmountController,
             ),
           ),
           Container(
@@ -141,10 +142,7 @@ class ThirdPage extends StatelessWidget {
                           style: TextStyle(fontSize: 22),
                         ),
                         items: [
-                          'Shopping',
-                          'Food',
-                          'Subscription',
-                          'Transpotation',
+                          'Salary',
                         ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -156,9 +154,9 @@ class ThirdPage extends StatelessWidget {
                         }).toList(),
                         onChanged: (value) {
                           // setState(() {
-                          //   dropdownValue3 = value;
+                          //   dropdownValue1 = value;
                           // });
-                          prov.operator3(value);
+                          prov.oprator1(value);
                         },
                       ),
                     ),
@@ -174,7 +172,7 @@ class ThirdPage extends StatelessWidget {
                           ),
                           hintText: 'Description',
                         ),
-                        controller: SubtitleController,
+                        controller: incomeDiscriptionController,
                       ),
                     ),
                     Padding(
@@ -204,9 +202,9 @@ class ThirdPage extends StatelessWidget {
                         }).toList(),
                         onChanged: (value) {
                           // setState(() {
-                          //   dropdownValue4 = value;
+                          //   dropdownValue2 = value;
                           // });
-                          prov.operator4(value);
+                          prov.oprator2(value);
                         },
                       ),
                     ),
@@ -250,7 +248,7 @@ class ThirdPage extends StatelessWidget {
                         ),
                         subtitle: Text('Repeat Transaction'),
                         trailing: Switch(
-                          value: isSwitch2,
+                          value: isSwitch1,
                           onChanged: (value) {
                             // setState(() {
                             //   isSwitch = value;
@@ -271,7 +269,7 @@ class ThirdPage extends StatelessWidget {
                           color: Color.fromRGBO(117, 54, 241, 1)),
                       child: TextButton(
                           onPressed: () {
-                            functionExp(context);
+                            functionnn(context);
                           },
                           child: Text(
                             'Continue',

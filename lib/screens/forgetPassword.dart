@@ -1,5 +1,5 @@
 import 'package:expense_app/auth/firebaseAuth.dart';
-import 'package:expense_app/forgotPass2.dart';
+import 'package:expense_app/screens/forgotPass2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
