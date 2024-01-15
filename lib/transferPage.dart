@@ -32,10 +32,10 @@ class fourthPaeg extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
+          const SizedBox(
             height: 35,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'How much?',
                 style: TextStyle(fontSize: 19, color: Colors.white),

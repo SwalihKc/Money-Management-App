@@ -71,7 +71,7 @@ class welcomePage extends StatelessWidget {
               itemCount: sliderImages.length,
             ),
           ),
-          SizedBox(height: 20,),
+     const SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.only(left: 10,right: 10),
             child: ElevatedButton(
@@ -110,7 +110,7 @@ class welcomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => loginPage(),
+                      builder: (context) => LoginPage(),
                     ),
                   );
                 },
@@ -123,7 +123,10 @@ class welcomePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
-                )),
+                ),
+                child: const Text('Login',
+                    style: TextStyle(
+                        fontSize: 17, color: Color.fromRGBO(127, 61, 255, 1)))),
           ),
         ],
       ),

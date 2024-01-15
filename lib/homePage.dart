@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: [
-              DrawerHeader(
+              const DrawerHeader(
                 child: Text(
                   'Account',
                   style: TextStyle(

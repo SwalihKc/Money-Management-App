@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'homePage.dart';
 
-class incomePage extends StatelessWidget {
-  incomePage({super.key,});
+class IncomePage extends StatelessWidget {
+  IncomePage({super.key,});
 
   String? dropdownValue1;
 

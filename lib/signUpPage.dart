@@ -188,11 +188,8 @@ class Signing extends StatelessWidget {
                 // setState(() {
                 //   isLoading = true;
                 // });
-                
-                
                 var id =
                     await OtpVerfication.sendingOTP(EmailSignUpController.text);
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
